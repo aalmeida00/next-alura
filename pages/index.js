@@ -1,15 +1,12 @@
 import styled from "styled-components";
 import db from "../db.json";
 import Widget from "../src/components/Widget";
+import QuizBackground from "../src/components/QuizBackground";
+
+import Footer from "../src/components/Footer";
+import GitHubCorner from "../src/components/GitHubCorner";
 
 const theme = db.theme;
-
-const BackgroundImage = styled.div`
-  background-image: url(${db.bg});
-  flex: 1;
-  background-size: cover;
-  background-position: center;
-`;
 
 const QuizContainer = styled.div`
   width: 100%;
@@ -25,7 +22,7 @@ const QuizContainer = styled.div`
 
 export default function Home() {
   return (
-    <BackgroundImage>
+    <QuizBackground backgroundImage={db.img}>
       <QuizContainer>
         <Widget>
           <Widget.Header>
@@ -41,7 +38,9 @@ export default function Home() {
             <p>Lorem ipsum dolor sit amet.</p>
           </Widget.Content>
         </Widget>
+        <Footer />
       </QuizContainer>
-    </BackgroundImage>
+      <GitHubCorner projectUrl="https://github.com/aalmeida00/next-alura" />
+    </QuizBackground>
   );
 }
