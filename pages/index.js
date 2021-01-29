@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import db from "../db.json";
+import Widget from "../src/components/Widget";
+
+const theme = db.theme;
 
 const BackgroundImage = styled.div`
   background-image: url(${db.bg});
@@ -23,7 +26,22 @@ const QuizContainer = styled.div`
 export default function Home() {
   return (
     <BackgroundImage>
-      <QuizContainer>Hello</QuizContainer>
+      <QuizContainer>
+        <Widget>
+          <Widget.Header>
+            <h1>The Legend of Zelda</h1>
+          </Widget.Header>
+          <Widget.Content>
+            <p>Lorem ipsum dolor sit amet.</p>
+          </Widget.Content>
+        </Widget>
+        <Widget>
+          <Widget.Content>
+            <h1>Quizes da galera</h1>
+            <p>Lorem ipsum dolor sit amet.</p>
+          </Widget.Content>
+        </Widget>
+      </QuizContainer>
     </BackgroundImage>
   );
 }
