@@ -1,12 +1,13 @@
-import styled from "styled-components";
-import db from "../db.json";
-import Widget from "../src/components/Widget";
-import QuizBackground from "../src/components/QuizBackground";
+import React from 'react';
+import styled from 'styled-components';
+import db from '../db.json';
+import Widget from '../src/components/Widget';
+import QuizBackground from '../src/components/QuizBackground';
 
-import Footer from "../src/components/Footer";
-import GitHubCorner from "../src/components/GitHubCorner";
+import Footer from '../src/components/Footer';
+import GitHubCorner from '../src/components/GitHubCorner';
 
-const theme = db.theme;
+// const { theme } = db;
 
 const QuizContainer = styled.div`
   width: 100%;
@@ -22,7 +23,10 @@ const QuizContainer = styled.div`
 
 export default function Home() {
   return (
-    <QuizBackground backgroundImage={db.img}>
+    <QuizBackground backgroundImage={db.bg}>
+      {/* <Head>
+        <title>Quiz da Imersão Alura</title>
+      </Head> */}
       <QuizContainer>
         <Widget>
           <Widget.Header>
