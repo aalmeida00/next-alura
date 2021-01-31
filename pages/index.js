@@ -1,5 +1,9 @@
-import React from 'react';
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable func-names */
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
+
 import db from '../db.json';
 import Widget from '../src/components/Widget';
 import QuizBackground from '../src/components/QuizBackground';
@@ -22,6 +26,9 @@ const QuizContainer = styled.div`
 `;
 
 export default function Home() {
+  const router = useRouter();
+  const [name, setName] = useState('');
+
   return (
     <QuizBackground backgroundImage={db.bg}>
       {/* <Head>
@@ -33,7 +40,23 @@ export default function Home() {
             <h1>The Legend of Zelda</h1>
           </Widget.Header>
           <Widget.Content>
-            <p>Lorem ipsum dolor sit amet.</p>
+            <form
+              onSubmit={function (e) {
+                e.preventDefault();
+                router.push(`/quiz?name=${name}`);
+              }}
+            >
+              <input
+                onChange={function (e) {
+                  setName(e.target.value);
+                }}
+                placeholder="Diz ai seu nome"
+                type="text"
+              />
+              <button disabled={name.length === 0} type="submit">
+                Jogar {name}
+              </button>
+            </form>
           </Widget.Content>
         </Widget>
         <Widget>
