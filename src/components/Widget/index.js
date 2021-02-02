@@ -39,14 +39,16 @@ Widget.Content = styled.div`
     font-size: 14px;
     line-height: 24px;
     width: 100%;
-    color: #f9f9ff;
     background-color: transparent;
     border: 1px solid ${({ theme }) => theme.colors.primary};
     border-radius: 4px;
-    padding-left: 16px;
+    padding: 5px 16px;
     &:focus {
       border: 1px solid ${({ theme }) => theme.colors.primary};
       outline: none;
+    }
+    &::placeholder {
+      color: #f9f9ff;
     }
   }
   button {
