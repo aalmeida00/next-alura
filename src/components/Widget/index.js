@@ -43,6 +43,7 @@ Widget.Content = styled.div`
     border: 1px solid ${({ theme }) => theme.colors.primary};
     border-radius: 4px;
     padding: 5px 16px;
+    color: #f9f9ff;
     &:focus {
       border: 1px solid ${({ theme }) => theme.colors.primary};
       outline: none;
