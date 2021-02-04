@@ -35,23 +35,7 @@ Widget.Content = styled.div`
     list-style: none;
     padding: 0;
   }
-  input {
-    font-size: 14px;
-    line-height: 24px;
-    width: 100%;
-    background-color: transparent;
-    border: 1px solid ${({ theme }) => theme.colors.primary};
-    border-radius: 4px;
-    padding: 5px 16px;
-    color: #f9f9ff;
-    &:focus {
-      border: 1px solid ${({ theme }) => theme.colors.primary};
-      outline: none;
-    }
-    &::placeholder {
-      color: #f9f9ff;
-    }
-  }
+
   button {
     margin-top: 24px;
     font-size: 14px;
