@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 
@@ -20,26 +21,40 @@ function LoadingWidget() {
   );
 }
 
+function QuestionWidget({ questions, totalQuestions, questionIndex }) {
+  return (
+    <Widget>
+      <Widget.Header>
+        {/* <BackLinkArrow href="/" /> */}
+        <h3>{`Pergunta ${questionIndex + 1} de  ${totalQuestions}`}</h3>
+      </Widget.Header>
+      <img
+        alt="descricão"
+        style={{ width: '100%', height: '150px', objectFit: 'cover' }}
+        src={questions.image}
+      />
+      <Widget.Content>
+        <h2>{questions.title}</h2>
+        <p>{questions.description}</p>
+        <Button type="submit">Confirmar</Button>
+      </Widget.Content>
+    </Widget>
+  );
+}
+
 export default function QuizPage() {
+  const questionIndex = 0;
+  const questions = db.questions[questionIndex];
+  const totalQuestions = db.questions.length;
   return (
     <QuizBackground backgroundImage={db.bg}>
       <QuizContainer>
         <QuizLogo />
-        <Widget>
-          <Widget.Header>
-            <h3> Pergunta 1 de {` ${db.questions.length}`}</h3>
-          </Widget.Header>
-          <img
-            alt="descricão"
-            style={{ width: '100%', height: '150px', objectFit: 'cover' }}
-            src="http://placehold.it/400x400"
-          />
-          <Widget.Content>
-            <h2>Titulo</h2>
-            <p>Descrição</p>
-            <Button type="submit">Confirmar</Button>
-          </Widget.Content>
-        </Widget>
+        <QuestionWidget
+          questionIndex={questionIndex}
+          totalQuestions={totalQuestions}
+          questions={questions}
+        />
         <LoadingWidget />
         <Footer />
       </QuizContainer>
