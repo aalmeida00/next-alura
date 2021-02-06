@@ -8,6 +8,7 @@ import db from '../db.json';
 import Widget from '../src/components/Widget';
 import QuizBackground from '../src/components/QuizBackground';
 import QuizLogo from '../src/components/QuizLogo';
+import Input from '../src/components/Input';
 
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
@@ -48,12 +49,13 @@ export default function Home() {
                 router.push(`/quiz?name=${name}`);
               }}
             >
-              <input
-                onChange={function (e) {
+              <Input
+                name="nomedoUsuario"
+                onChange={(e) => {
                   setName(e.target.value);
                 }}
                 placeholder="Diz ai seu nome"
-                type="text"
+                value={name}
               />
               <button disabled={name.length === 0} type="submit">
                 Jogar {name}
