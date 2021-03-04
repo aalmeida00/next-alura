@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-one-expression-per-line */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import db from '../db.json';
 import Widget from '../src/components/Widget';
@@ -21,7 +21,12 @@ function LoadingWidget() {
   );
 }
 
-function QuestionWidget({ questions, totalQuestions, questionIndex }) {
+function QuestionWidget({
+  questions,
+  totalQuestions,
+  questionIndex,
+  onSubmit,
+}) {
   const questionId = `question__${questionIndex}`;
 
   return (
@@ -39,7 +44,12 @@ function QuestionWidget({ questions, totalQuestions, questionIndex }) {
         <h2>{questions.title}</h2>
         <p>{questions.description}</p>
 
-        <form>
+        <form
+          onSubmit={(infosDoEvento) => {
+            infosDoEvento.preventDefault();
+            onSubmit();
+          }}
+        >
           {questions.alternatives.map((alternative, alternativeIndex) => {
             const alternativeId = `alternative__${alternativeIndex}`;
             return (
@@ -63,20 +73,52 @@ function QuestionWidget({ questions, totalQuestions, questionIndex }) {
   );
 }
 
+const screenStates = {
+  QUIZ: 'QUIZ',
+  LOADING: 'LOADING',
+  RESULT: 'RESULT',
+};
+
 export default function QuizPage() {
-  const questionIndex = 0;
+  const [screenState, setScreenState] = useState(screenStates.QUIZ);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const questionIndex = currentQuestion;
   const questions = db.questions[questionIndex];
   const totalQuestions = db.questions.length;
+
+  function handleSubmitQuiz() {
+    const nextQuestion = questionIndex + 1;
+    if (nextQuestion < totalQuestions) {
+      setCurrentQuestion(questionIndex + 1);
+    } else {
+      setScreenState(screenStates.RESULT);
+    }
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setScreenState(screenStates.QUIZ);
+    }, 1 * 1000);
+  }, []);
+
   return (
     <QuizBackground backgroundImage={db.bg}>
       <QuizContainer>
         <QuizLogo />
-        <QuestionWidget
-          questionIndex={questionIndex}
-          totalQuestions={totalQuestions}
-          questions={questions}
-        />
-        <LoadingWidget />
+        {screenState === screenStates.QUIZ && (
+          <QuestionWidget
+            questionIndex={questionIndex}
+            totalQuestions={totalQuestions}
+            questions={questions}
+            onSubmit={handleSubmitQuiz}
+          />
+        )}
+        {screenState === screenStates.LOADING && <LoadingWidget />}
+        {/* todo: result page */}
+        {screenState === screenStates.RESULT && (
+          <div>Voce acertou X questões, parabéns!</div>
+        )}
+
         <Footer />
       </QuizContainer>
       <GitHubCorner projectUrl="https://github.com/aalmeida00/next-alura" />
